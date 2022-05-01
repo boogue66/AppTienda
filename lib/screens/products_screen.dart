@@ -34,7 +34,7 @@ class _ProductScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final productForm = Provider.of<ProductFormProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.7),
+      backgroundColor: Colors.black.withOpacity(0.7),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
@@ -62,10 +62,10 @@ class _ProductScreenBody extends StatelessWidget {
 
                         final XFile? file = XFile(image!.path);
                         if (file == null) {
-                          print('No selecciono nada');
+                          //print('No selecciono nada');
                           return;
                         }
-                        print('Tenemos image$file');
+                        //print('Tenemos image$file');
                         productService.updateSelectedProducImage(file.path);
                       },
                       icon: const Icon(
@@ -86,10 +86,10 @@ class _ProductScreenBody extends StatelessWidget {
                             source: ImageSource.gallery, imageQuality: 100);
                         final XFile? file = XFile(image!.path);
                         if (file == null) {
-                          print('No selecciono nada');
+                          //print('No selecciono nada');
                           return;
                         }
-                        print('Tenemos image$file');
+                        //|print('Tenemos image$file');
                         productService.updateSelectedProducImage(file.path);
                       },
                       icon: const Icon(

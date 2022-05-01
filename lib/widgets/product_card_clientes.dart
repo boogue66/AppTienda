@@ -3,17 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:tienda/models/models.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCardClientes extends StatelessWidget {
   final Product producto;
 
-  const ProductCard({Key? key, required this.producto}) : super(key: key);
+  const ProductCardClientes({Key? key, required this.producto})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
-        margin: const EdgeInsets.only(top: 25, bottom: 10),
+        margin: const EdgeInsets.only(top: 10, bottom: 10),
         width: double.infinity,
         height: 400,
         decoration: _cardBorders(),
@@ -25,11 +26,6 @@ class ProductCard extends StatelessWidget {
               title: producto.nombre,
               subtitle: producto.puntos.toString() + ' Fotos ',
             ),
-            /* Positioned(
-              top: 0,
-              right: 0,
-              child: _ProductPrice(producto.puntos),
-            ), */
             if (!producto.disponible)
               Positioned(
                 child: _NoAvalible(producto.puntos),
@@ -79,7 +75,7 @@ class _NoAvalible extends StatelessWidget {
               const Text(
                 'DISPONIBLE',
                 style: TextStyle(
-                    fontSize: 60,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 240, 120, 160),
                     overflow: TextOverflow.clip),
@@ -87,7 +83,7 @@ class _NoAvalible extends StatelessWidget {
               Text(
                 '¥ $puntos',
                 style: const TextStyle(
-                    fontSize: 90,
+                    fontSize: 50,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 240, 120, 160),
                     overflow: TextOverflow.clip),
@@ -100,41 +96,6 @@ class _NoAvalible extends StatelessWidget {
   }
 }
 
-/* class _ProductPrice extends StatelessWidget {
-  final int puntos;
-  const _ProductPrice(this.puntos);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 80,
-      height: 45,
-      alignment: Alignment.center,
-      decoration: const BoxDecoration(
-          color: Colors.black87,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-              topLeft: Radius.circular(5))),
-      child: FittedBox(
-        fit: BoxFit.cover,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            '¥ $puntos',
-            style: const TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 240, 100, 150)),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ),
-    );
-  }
-}
- */
 class _ProductDetaills extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -147,7 +108,7 @@ class _ProductDetaills extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         width: double.infinity,
-        height: 80,
+        height: 55,
         decoration: _buildBoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +116,7 @@ class _ProductDetaills extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                  fontSize: 35,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 240, 120, 160)),
               maxLines: 1,
@@ -164,7 +125,7 @@ class _ProductDetaills extends StatelessWidget {
             Text(
               subtitle,
               style: const TextStyle(
-                fontSize: 15,
+                fontSize: 10,
                 fontWeight: FontWeight.normal,
                 color: Colors.white,
               ),
@@ -198,10 +159,12 @@ class _BackroundImage extends StatelessWidget {
         //color: Colors.amberAccent,
         child: url == null
             ? const Image(
+                height: double.infinity,
                 image: AssetImage('assets/images/no-image.png'),
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               )
             : FadeInImage(
+                alignment: Alignment.center,
                 fit: BoxFit.cover,
                 placeholder: const AssetImage('assets/images/jar-loading.gif'),
                 image: NetworkImage(url!),

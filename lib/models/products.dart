@@ -6,13 +6,15 @@ class Product {
       required this.nombre,
       this.portada,
       required this.puntos,
-      this.id});
+      this.id,
+      required this.coleccion});
 
   bool disponible;
   String nombre;
   String? portada;
   int puntos;
   String? id;
+  List<Coleccion> coleccion;
 
   factory Product.fromJson(String str) => Product.fromMap(json.decode(str));
 
@@ -23,6 +25,8 @@ class Product {
         nombre: json["nombre"],
         portada: json["portada"],
         puntos: json["puntos"],
+        coleccion: List<Coleccion>.from(
+            json["coleccion"].map((x) => Coleccion.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -30,6 +34,7 @@ class Product {
         "nombre": nombre,
         "portada": portada,
         "puntos": puntos,
+        "coleccion": List<dynamic>.from(coleccion.map((x) => x.toMap())),
       };
 
   Product copy() => Product(
@@ -37,6 +42,41 @@ class Product {
         nombre: nombre,
         portada: portada,
         puntos: puntos,
+        coleccion: coleccion,
         id: id,
+      );
+}
+
+class Coleccion {
+  Coleccion({
+    required this.id,
+    required this.nombre,
+    required this.portada,
+  });
+
+  int id;
+  String nombre;
+  String portada;
+
+  factory Coleccion.fromJson(String str) => Coleccion.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Coleccion.fromMap(Map<String, dynamic> json) => Coleccion(
+        id: json["id"],
+        nombre: json["nombre"],
+        portada: json["portada"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "nombre": nombre,
+        "portada": portada,
+      };
+
+  Coleccion copy() => Coleccion(
+        id: id,
+        nombre: nombre,
+        portada: portada,
       );
 }

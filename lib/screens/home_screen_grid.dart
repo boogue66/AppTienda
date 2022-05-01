@@ -10,8 +10,10 @@ class HomeScreenGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int saldoInicial = 1000;
+    int credits = saldoInicial;
     final productsService = Provider.of<ProductsService>(context);
-    if (productsService.isLoading) return const LoadinScreen();
+    if (productsService.isLoading) return const LoadingScreen();
 
     return Scaffold(
       appBar: AppBar(
@@ -29,8 +31,8 @@ class HomeScreenGrid extends StatelessWidget {
             padding: const EdgeInsets.only(right: 20.0),
             child: TextButton(
               onPressed: () {},
-              child: const Text('¥: 10000',
-                  style: TextStyle(
+              child: Text('¥: $credits',
+                  style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 240, 100, 150),
@@ -40,11 +42,12 @@ class HomeScreenGrid extends StatelessWidget {
         ],
       ),
       body: GridView.builder(
+        shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisExtent: 300,
-            mainAxisSpacing: 0,
-            childAspectRatio: 3 / 2),
+          crossAxisCount: 3,
+          mainAxisSpacing: 0.0,
+          childAspectRatio: 2 / 3,
+        ),
         itemCount: productsService.productos.length,
         itemBuilder: (BuildContext context, int index) => GestureDetector(
           child: ProductCard(
@@ -65,7 +68,7 @@ class HomeScreenGrid extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           productsService.selectProduct =
-              Product(disponible: false, nombre: '', puntos: 50);
+              Product(disponible: false, nombre: '', puntos: 50, coleccion: []);
           Navigator.pushNamed(context, 'producto');
         },
       ),

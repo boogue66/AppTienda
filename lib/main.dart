@@ -36,9 +36,11 @@ class MyApp extends StatelessWidget {
         'home': (_) => const HomeScreen(),
         'inicio': (_) => const HomeScreenGrid(),
         'producto': (_) => const ProductScreen(),
-        'productoClientes': (_) => const ProductScreenClientes(),
         'inicioClientes': (_) => const HomeScreenGridClientes(),
-        'productoSets': (_) => const ProductScreenClientes(),
+        'productoClientes': (_) => const ProductScreenClientes(),
+        //'productoClientes2': (_) => const ProductScreenClientesDif(),
+        'colleccionClientes': (_) => const ColleccionScreen(),
+        'galeriaClientes': (_) => const GaleriaScreen(),
       },
       theme: ThemeData.light().copyWith(
         //scaffoldBackgroundColor: Colors.grey[300],

@@ -1,7 +1,4 @@
-// ignore_for_file: curly_braces_in_flow_control_structures
-
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class ProductImage extends StatelessWidget {
@@ -17,12 +14,12 @@ class ProductImage extends StatelessWidget {
       child: Container(
         decoration: _buildBoxDecoration(),
         width: double.infinity,
-        height: queryData.size.height * 0.6,
+        height: queryData.size.height * 0.7,
         child: Opacity(
           opacity: 0.7,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                topLeft: Radius.circular(15), topRight: Radius.circular(15)),
             child: getImage(url),
           ),
         ),
@@ -33,29 +30,31 @@ class ProductImage extends StatelessWidget {
   BoxDecoration _buildBoxDecoration() => BoxDecoration(
           color: Colors.black,
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
           ),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.10),
+                color: Colors.black.withOpacity(0.5),
                 blurRadius: 10,
-                offset: const Offset(0, 5)),
+                offset: const Offset(5, 5)),
           ]);
 
   Widget getImage(String? picture) {
-    if (picture == null)
+    if (picture == null) {
       return const Image(
         image: AssetImage('assets/images/no-image.png'),
         fit: BoxFit.cover,
       );
+    }
 
-    if (picture.startsWith('http'))
+    if (picture.startsWith('http')) {
       return FadeInImage(
         placeholder: const AssetImage('assets/images/jar-loading.gif'),
         image: NetworkImage(url!),
         fit: BoxFit.cover,
       );
+    }
 
     return Image.file(
       File(picture),

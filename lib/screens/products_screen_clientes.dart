@@ -11,10 +11,13 @@ class ProductScreenClientes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productService = Provider.of<ProductsService>(context);
+    // final colecciones = productService.selectProduct.coleccion;
 
     return ChangeNotifierProvider(
       create: (_) => ProductFormProvider(productService.selectProduct),
-      child: _ProductScreenBody(productService: productService),
+      child: _ProductScreenBody(
+        productService: productService,
+      ),
     );
     //return _ProductScreenBody(productService: productService);
   }
@@ -31,21 +34,18 @@ class _ProductScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.7),
+      backgroundColor: Colors.black.withOpacity(0.6),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
-          padding: const EdgeInsets.only(
-            top: 40,
-            bottom: 20,
-            left: 10,
-            right: 10,
-          ),
+          padding:
+              const EdgeInsets.only(top: 40, bottom: 20, left: 10, right: 10),
           child: Column(
             children: [
               Stack(
                 children: [
-                  ProductImage(url: productService.selectProduct.portada),
+                  ProductImage(
+                      url: productService.selectProduct.coleccion[0].portada),
                   _Regresar(),
                 ],
               ),
@@ -116,8 +116,8 @@ class _Productform extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                offset: const Offset(0, 5),
+                color: Colors.black.withOpacity(0.5),
+                offset: const Offset(5, 5),
                 blurRadius: 5)
           ]);
 }

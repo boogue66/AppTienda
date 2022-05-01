@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsService = Provider.of<ProductsService>(context);
-    if (productsService.isLoading) return const LoadinScreen();
+    if (productsService.isLoading) return const LoadingScreen();
 
     return Scaffold(
       appBar: AppBar(

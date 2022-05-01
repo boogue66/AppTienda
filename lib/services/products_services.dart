@@ -12,6 +12,9 @@ class ProductsService extends ChangeNotifier {
   final List<Product> productos = [];
   late Product selectProduct;
 
+  final List<Coleccion> colecciones = [];
+  late Coleccion coleccion;
+
   File? newPictureFile;
   bool isLoading = true;
   bool isSaving = false;
@@ -71,12 +74,6 @@ class ProductsService extends ChangeNotifier {
     productos[index] = producto;
     return producto.id!;
   }
-
-  /* void  deleteProduct(Product producto)  {
-      // ignore: list_remove_unrelated_type
-      productos.remove(producto.id);
-      
-    } */
 
   void updateSelectedProducImage(String path) {
     selectProduct.portada = path;

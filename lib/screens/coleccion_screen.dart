@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tienda/screens/screens.dart';
-import 'package:tienda/widgets/widgets.dart';
+import 'package:tienda/widgets/product_card_coleccion.dart';
+//import 'package:tienda/widgets/widgets.dart';
 import 'package:tienda/services/services.dart';
+import 'package:tienda/models/models.dart';
 
-class HomeScreenGridClientes extends StatelessWidget {
-  const HomeScreenGridClientes({Key? key}) : super(key: key);
+class ColleccionScreen extends StatelessWidget {
+  final Coleccion? coleccion;
+  final String? url;
+  const ColleccionScreen({Key? key, this.url, this.coleccion})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     int saldoInicial = 1000;
     int credits = saldoInicial;
-    final productsService = Provider.of<ProductsService>(context);
-    if (productsService.isLoading) return const LoadingScreen();
+    final productService = Provider.of<ProductsService>(context);
+    final colecciones = productService.selectProduct.coleccion;
+    if (productService.isLoading) return const LoadingScreen();
 
     return Scaffold(
       appBar: AppBar(
@@ -47,18 +53,18 @@ class HomeScreenGridClientes extends StatelessWidget {
           mainAxisSpacing: 0.0,
           childAspectRatio: 3 / 3,
         ),
-        itemCount: productsService.productos.length,
+        itemCount: colecciones.length,
         itemBuilder: (BuildContext context, int index) => GestureDetector(
-          child: ProductCardClientes(
-            producto: productsService.productos[index],
+          child: ProductCardColeccion(
+            coleccion: colecciones[index],
           ),
           onTap: () {
-            productsService.selectProduct =
-                productsService.productos[index].copy();
+            /* productService.selectProduct.coleccion = productService.selectProduct.coleccion[index].copy()
+                    as List<Coleccion>; */
             /* if (productsService.selectProduct.disponible == false) {
               return;
             } */
-            Navigator.pushNamed(context, 'colleccionClientes');
+            Navigator.pushNamed(context, 'productoClientes');
           },
         ),
       ),
